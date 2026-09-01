@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dr. Ardeleanu · Raport Financiar Iulie 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Poppins',system-ui,sans-serif;
+    background:#F5EDE3;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    color:#222222;
+  }
+  .card{
+    width:100%;
+    max-width:420px;
+    background:#ffffff;
+    border-radius:20px;
+    box-shadow:0 12px 48px rgba(60,20,14,0.14),0 2px 8px rgba(60,20,14,0.08);
+    overflow:hidden;
+  }
+  .hdr{
+    background:#7B1C16;
+    padding:28px 28px 22px;
+    text-align:center;
+  }
+  .hdr .brand{
+    font-family:'Playfair Display',serif;
+    font-size:22px;
+    font-weight:700;
+    color:#fff;
+    letter-spacing:-0.01em;
+  }
+  .hdr .sub{
+    font-size:10px;
+    font-weight:500;
+    color:#F2DAB7;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    margin-top:6px;
+  }
+  .hdr .since{
+    font-size:9px;
+    color:rgba(242,218,183,0.65);
+    margin-top:10px;
+    letter-spacing:0.06em;
+  }
+
+  /* ── GATE ── */
+  #gate{ padding:28px; }
+  #gate p{ font-size:12.5px; color:#5a4035; line-height:1.5; margin-bottom:16px; text-align:center; }
+  #gate .field{ position:relative; margin-bottom:12px; }
+  #gate input[type=password]{
+    width:100%;
+    padding:13px 14px;
+    border:1.5px solid #ecddd4;
+    border-radius:10px;
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+    color:#222222;
+    outline:none;
+    transition:border-color .15s;
+  }
+  #gate input[type=password]:focus{ border-color:#7B1C16; }
+  #gate button{
+    width:100%;
+    padding:13px 14px;
+    background:#7B1C16;
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.03em;
+    cursor:pointer;
+    transition:background .15s;
+  }
+  #gate button:hover{ background:#631610; }
+  #gate .err{
+    color:#b33030;
+    font-size:11.5px;
+    text-align:center;
+    margin-top:10px;
+    min-height:14px;
+  }
+
+  /* ── LINKS (post-unlock) ── */
+  #links{ padding:24px 24px 28px; display:none; }
+  #links .lead{ font-size:12px; color:#8a7e74; text-align:center; margin-bottom:18px; }
+  .doc-link{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:#FAF6F2;
+    border:1px solid #ecddd4;
+    border-radius:14px;
+    padding:16px 16px;
+    margin-bottom:12px;
+    text-decoration:none;
+    transition:transform .12s, box-shadow .12s;
+  }
+  .doc-link:hover{ transform:translateY(-1px); box-shadow:0 4px 14px rgba(123,28,22,0.12); }
+  .doc-link .icon{
+    width:42px;height:42px;border-radius:11px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:19px;flex-shrink:0;
+    background:#7B1C16;color:#FBE483;
+  }
+  .doc-link.mobile .icon{ background:#B5BD5C; color:#fff; }
+  .doc-link .txt .t{ font-size:13.5px; font-weight:700; color:#1e0e0b; }
+  .doc-link .txt .d{ font-size:10.5px; color:#a08070; margin-top:2px; }
+  .doc-link .arrow{ margin-left:auto; color:#c06040; font-size:16px; }
+
+  .footer{
+    text-align:center;
+    padding:14px 16px 18px;
+    border-top:1px solid #ecddd4;
+    font-size:9.5px;
+    color:#b09080;
+    letter-spacing:0.04em;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="hdr">
+    <div class="brand">Dr. Ardeleanu</div>
+    <div class="sub">Dental Clinics · Raportare Financiară</div>
+    <div class="since">Din 2017</div>
+  </div>
+
+  <div id="gate">
+    <p>Acest raport conține date financiare confidențiale. Introduceți parola pentru acces.</p>
+    <div class="field">
+      <input type="password" id="pw" placeholder="Parolă" autocomplete="off"/>
+    </div>
+    <button id="unlock-btn" onclick="tryUnlock()">Accesează raportul</button>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div id="links">
+    <div class="lead">Raport Financiar · Iulie 2026</div>
+    <a class="doc-link" href="dashboard.html" target="_blank" rel="noopener">
+      <div class="icon">📊</div>
+      <div class="txt">
+        <div class="t">CFO Dashboard</div>
+        <div class="d">Raport complet — desktop</div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+    <a class="doc-link mobile" href="mobile.html" target="_blank" rel="noopener">
+      <div class="icon">📱</div>
+      <div class="txt">
+        <div class="t">Executive Summary</div>
+        <div class="d">Rezumat — mobil / WhatsApp</div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+  </div>
+
+  <div class="footer">Clinicile Dr. Ardeleanu &middot; Acces restricționat</div>
+</div>
+
+<script>
+// Client-side password gate. Note: this only hides the links behind a prompt —
+// the underlying pages are still reachable by anyone who has (or guesses) their
+// direct URL. Use this for casual access control, not for truly sensitive data.
+const PW_HASH = 'fb8837bf1fde6bb35a4df3789b02036378d368b73bba19ead085687f84a4ddb0';
+
+async function sha256(text) {
+  const enc = new TextEncoder().encode(text);
+  const buf = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function tryUnlock() {
+  const input = document.getElementById('pw');
+  const err = document.getElementById('err');
+  const hash = await sha256(input.value);
+  if (hash === PW_HASH) {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('links').style.display = 'block';
+    try { sessionStorage.setItem('ardeleanu_unlocked', '1'); } catch (e) {}
+  } else {
+    err.textContent = 'Parolă incorectă. Încearcă din nou.';
+    input.value = '';
+    input.focus();
+  }
+}
+
+document.getElementById('pw').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') tryUnlock();
+});
+
+// Skip the prompt if already unlocked earlier in this browser tab session.
+try {
+  if (sessionStorage.getItem('ardeleanu_unlocked') === '1') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('links').style.display = 'block';
+  }
+} catch (e) {}
+</script>
+
+</body>
+</html>
